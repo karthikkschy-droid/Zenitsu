@@ -1,0 +1,44 @@
+cat <<EOF > ~/.config/hypr/hyprland.conf
+monitor=,preferred,auto,1
+exec-once = waybar & aww-daemon
+input { kb_layout = us }
+
+general {
+    gaps_in = 5
+    gaps_out = 10
+    border_size = 2
+    col.active_border = rgba(FFD700ee) rgba(FFFFFFee) 45deg
+    col.inactive_border = rgba(1a1a1aee)
+}
+
+decoration {
+    rounding = 10
+    blur {
+        enabled = true
+        size = 8
+        passes = 3
+    }
+    # This is the new syntax that will kill those 193 errors
+    shadow {
+        enabled = true
+        range = 15
+        render_power = 3
+        color = rgba(FFD70066)
+    }
+}
+
+animations {
+    enabled = yes
+    bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+    animation = windows, 1, 7, myBezier
+    animation = fade, 1, 7, default
+    animation = workspaces, 1, 6, default
+}
+
+bind = SUPER, Q, exec, kitty
+bind = SUPER, SPACE, exec, wofi --show drun
+bind = SUPER, E, exec, dolphin
+bind = SUPER, C, killactive,
+bind = SUPER, M, exit,
+bind = SUPER, W, exec, bash ~/.config/hypr/wall.sh
+EOF
